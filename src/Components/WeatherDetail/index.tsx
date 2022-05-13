@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text, Image, SafeAreaView} from 'react-native';
-import {WeatherDetailProps, WeatherImagesProps} from '../../Interfaces';
+import { View, Text, Image, SafeAreaView } from 'react-native';
+import { WeatherDetailProps, WeatherImagesProps } from '../../Interfaces';
 import style from './style';
 
 const WeatherDetail: React.FC<WeatherDetailProps> = ({
@@ -13,7 +13,7 @@ const WeatherDetail: React.FC<WeatherDetailProps> = ({
   visibility,
   pressure,
   dewPoint,
-  currentCity,
+  currentCity
 }) => {
   return (
     <SafeAreaView style={style.container}>
@@ -38,11 +38,11 @@ const WeatherDetail: React.FC<WeatherDetailProps> = ({
                         key={index}
                         style={style.weatherImage}
                         source={{
-                          uri: `https://openweathermap.org/img/wn/${item.icon}@4x.png`,
+                          uri: `https://openweathermap.org/img/wn/${item.icon}@4x.png`
                         }}
                       />
                     );
-                  },
+                  }
                 )}
               </View>
             </View>
@@ -69,4 +69,4 @@ const WeatherDetail: React.FC<WeatherDetailProps> = ({
   );
 };
 
-export {WeatherDetail};
+export { WeatherDetail };

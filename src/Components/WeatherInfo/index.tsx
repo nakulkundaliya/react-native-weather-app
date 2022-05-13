@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Text, Image, FlatList} from 'react-native';
+import { View, Text, Image, FlatList } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {WeatherImagesProps, WeatherInfoProps} from '../../Interfaces';
-import {Colors} from '../../Utils/colors';
-import {DATA} from '../../Utils/MockData';
+import { WeatherImagesProps, WeatherInfoProps } from '../../Interfaces';
+import { Colors } from '../../Utils/colors';
+import { DATA } from '../../Utils/MockData';
 import style from './style';
 
 const WeatherInfo: React.FC<WeatherInfoProps> = ({
@@ -11,16 +11,17 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
   date,
   time,
   temperature,
-  weatherImages,
+  weatherImages
 }) => {
   return (
     <View style={style.containerCard}>
       <LinearGradient
         style={style.linearGradient}
         locations={[0, 0.7, 0.9]}
-        start={{x: 0, y: 0}}
-        end={{x: 0, y: 1}}
-        colors={[Colors.gradient1, Colors.gradient2, Colors.gradient3]}>
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+        colors={[Colors.gradient1, Colors.gradient2, Colors.gradient3]}
+      >
         <View style={[style.cardContent]}>
           <Text style={style.text}>{city}</Text>
           <Text style={[style.text, style.detailText]}>{date}</Text>
@@ -34,7 +35,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
                 key={index}
                 style={style.weatherImage}
                 source={{
-                  uri: `https://openweathermap.org/img/wn/${item.icon}@4x.png`,
+                  uri: `https://openweathermap.org/img/wn/${item.icon}@4x.png`
                 }}
               />
             );
@@ -45,7 +46,7 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
             data={DATA}
             horizontal
             keyExtractor={(item, index) => String(index)}
-            renderItem={({item, index}) => (
+            renderItem={({ item, index }) => (
               <View key={index} style={style.listContain}>
                 <View style={style.subContainer}>
                   <Text style={style.weatherdataText}>{item.date}</Text>
@@ -63,4 +64,4 @@ const WeatherInfo: React.FC<WeatherInfoProps> = ({
   );
 };
 
-export {WeatherInfo};
+export { WeatherInfo };

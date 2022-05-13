@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {Colors} from '../../Utils/colors';
-import {WeatherCardProps, WeatherImagesProps} from '../../Interfaces';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { Colors } from '../../Utils/colors';
+import { WeatherCardProps, WeatherImagesProps } from '../../Interfaces';
 import style from './style';
 
 const WeatherCard: React.FC<WeatherCardProps> = ({
@@ -13,7 +13,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   weatherImages,
   onPressWeatherCard,
   onPressFaviouriteCard,
-  isLike,
+  isLike
 }) => {
   return (
     <TouchableOpacity onPress={onPressWeatherCard} style={style.containerCard}>
@@ -27,7 +27,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
             source={heartIcon}
             style={[
               style.heartIcon,
-              {tintColor: isLike ? Colors.red : Colors.white},
+              { tintColor: isLike ? Colors.red : Colors.white }
             ]}
           />
         </TouchableOpacity>
@@ -38,7 +38,7 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
             key={index}
             style={style.weatherImage}
             source={{
-              uri: `https://openweathermap.org/img/wn/${item.icon}@4x.png`,
+              uri: `https://openweathermap.org/img/wn/${item.icon}@4x.png`
             }}
           />
         ))}
@@ -47,4 +47,4 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   );
 };
 
-export {WeatherCard};
+export { WeatherCard };

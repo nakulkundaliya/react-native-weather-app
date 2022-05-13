@@ -1,11 +1,11 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const style = StyleSheet.create({
   iconView: {
     height: 20,
     width: 20,
-    alignSelf: 'center',
-  },
+    alignSelf: 'center'
+  }
 });
 
 export default style;

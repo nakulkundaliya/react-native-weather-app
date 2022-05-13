@@ -1,29 +1,29 @@
 import * as Types from '../types';
 
 const intialState = {
-  data: [],
+  data: []
 };
 
 const currentWeatherReducer = (state = intialState, action: any) => {
-  const {type, payload} = action;
+  const { type, payload } = action;
   switch (type) {
     case Types.GET_CURRENT_WEATHER_LOADING:
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     case Types.GET_CURRENT_WEATHER_SUCCESS:
       return {
         ...state,
         data: payload,
-        loading: false,
+        loading: false
       };
     case Types.GET_CURRENT_WEATHER_FAILED:
       return {
         ...state,
         data: [],
         error: payload,
-        loading: false,
+        loading: false
       };
     default:
       return state;

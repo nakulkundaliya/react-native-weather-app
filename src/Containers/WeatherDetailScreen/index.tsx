@@ -1,16 +1,16 @@
 import React from 'react';
-import {View, SafeAreaView, ScrollView} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { View, SafeAreaView, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 
-import {Header, WeatherDetail} from '../../Components';
+import { Header, WeatherDetail } from '../../Components';
 import style from './style';
 
-const WeatherDetailScreen = ({route}: {route: any}) => {
+const WeatherDetailScreen = ({ route }: { route: any }) => {
   const navigation = useNavigation();
   let weatherDetail = route.params.detailData;
   let localTime = new Date(
-    weatherDetail?.dt * 1000 + weatherDetail?.sys.timezone * 1000,
+    weatherDetail?.dt * 1000 + weatherDetail?.sys.timezone * 1000
   );
 
   let tempartureData = weatherDetail.main.temp - 273.15;
@@ -25,7 +25,7 @@ const WeatherDetailScreen = ({route}: {route: any}) => {
       <Header
         weatherDetail
         leftIcon
-        title="Weather Details"
+        title='Weather Details'
         onPressLeft={onBackpress}
       />
       <ScrollView contentContainerStyle={style.scrollContainer}>

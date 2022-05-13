@@ -1,30 +1,30 @@
-import {Platform, PermissionsAndroid} from 'react-native';
+import { Platform, PermissionsAndroid } from 'react-native';
 
 import Geolocation from '@react-native-community/geolocation';
 import Toast from 'react-native-simple-toast';
 import RNAndroidLocationEnabler from 'react-native-android-location-enabler';
 
 export const isAndroid = Platform.OS === 'android';
-export const showToast = message => Toast.show(message);
+export const showToast = (message) => Toast.show(message);
 
 export const locationPermission = async () => {
   if (isAndroid) {
     return RNAndroidLocationEnabler.promptForEnableLocationIfNeeded({
       interval: 10000,
-      fastInterval: 5000,
+      fastInterval: 5000
     })
-      .then(async resp => {
+      .then(async (resp) => {
         if (resp === 'enabled' || resp === 'already-enabled') {
           if (isAndroid && Platform.Version < 23) {
             return true;
           }
           const hasPermission = await PermissionsAndroid.check(
-            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
           );
           if (hasPermission) return true;
 
           const status = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
           );
           if (status === PermissionsAndroid.RESULTS.GRANTED) return true;
           if (status === PermissionsAndroid.RESULTS.DENIED) {
@@ -35,15 +35,15 @@ export const locationPermission = async () => {
           return false;
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (err['code'] === 'ERR00') {
           showToast(
-            appConstants['PLEASE_ENABLE_YOUR_LOCATION_FOR_BETTER_EXPERIENCE'],
+            appConstants['PLEASE_ENABLE_YOUR_LOCATION_FOR_BETTER_EXPERIENCE']
           );
           return false;
         } else if (err['code'] === 'ERR01') {
           showToast(
-            appConstants['PLEASE_ENABLE_YOUR_LOCATION_MANUALLY_FROM_SETTING'],
+            appConstants['PLEASE_ENABLE_YOUR_LOCATION_MANUALLY_FROM_SETTING']
           );
           return false;
         } else if (err['code'] === 'ERR02') {
@@ -53,7 +53,7 @@ export const locationPermission = async () => {
       });
   } else {
     const hasLocationPermission = await Geolocation.requestAuthorization(
-      'always',
+      'always'
     );
     if (
       hasLocationPermission == 'denied' ||
@@ -72,51 +72,50 @@ export const getCurrentLocationCoordinate = async () => {
     if (hasLocationPermission) {
       try {
         Geolocation.getCurrentPosition(
-          position => {
+          (position) => {
             const location = {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
-              error: null,
+              error: null
             };
             resolve(location);
           },
-          error => {
+          (error) => {
             resolve({
               latitude: null,
               longitude: null,
-              error: error['message'],
+              error: error['message']
             });
           },
-          {timeout: 20000, maximumAge: 10000},
+          { timeout: 20000, maximumAge: 10000 }
         );
       } catch (err) {
         showToast(
-          appConstants['PLEASE_ENABLE_YOUR_LOCATION_FOR_BETTER_EXPERIENCE'],
+          appConstants['PLEASE_ENABLE_YOUR_LOCATION_FOR_BETTER_EXPERIENCE']
         );
         resolve({
           latitude: null,
           longitude: null,
           error:
-            appConstants['PLEASE_ENABLE_YOUR_LOCATION_FOR_BETTER_EXPERIENCE'],
+            appConstants['PLEASE_ENABLE_YOUR_LOCATION_FOR_BETTER_EXPERIENCE']
         });
       }
     } else {
       showToast(
-        appConstants['PLEASE_ENABLE_YOUR_LOCATION_FOR_BETTER_EXPERIENCE'],
+        appConstants['PLEASE_ENABLE_YOUR_LOCATION_FOR_BETTER_EXPERIENCE']
       );
       resolve({
         latitude: null,
         longitude: null,
-        error:
-          appConstants['PLEASE_ENABLE_YOUR_LOCATION_FOR_BETTER_EXPERIENCE'],
+        error: appConstants['PLEASE_ENABLE_YOUR_LOCATION_FOR_BETTER_EXPERIENCE']
       });
     }
   });
 };
 
 export const searchByCity = (data, text) => {
-  let searchFilterData = data.filter(item =>
-    item?.name?.toLowerCase().includes(text.toLowerCase()),
+  let searchFilterData = data.filter((item) =>
+    item?.name?.toLowerCase().includes(text.toLowerCase())
   );
   return searchFilterData;
 };
@@ -124,13 +123,13 @@ export const searchByCity = (data, text) => {
 export const faviouriteData = (data, index) => {
   let searchData = [...data];
   let likeDislike = searchData.map((item, idx) =>
-    idx === index ? {...item, isLike: !item.isLike} : item,
+    idx === index ? { ...item, isLike: !item.isLike } : item
   );
   let faviourite = likeDislike[index];
   likeDislike.splice(index, 1);
   likeDislike.unshift(faviourite);
-  let WeatherLikeData = likeDislike.filter(item => item.isLike === true);
-  let WeatherDisLikeData = likeDislike.filter(item => item.isLike === false);
+  let WeatherLikeData = likeDislike.filter((item) => item.isLike === true);
+  let WeatherDisLikeData = likeDislike.filter((item) => item.isLike === false);
   var weatherSortedData = [...WeatherLikeData].concat([...WeatherDisLikeData]);
   return weatherSortedData;
 };

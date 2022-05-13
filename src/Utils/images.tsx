@@ -8,5 +8,5 @@ export const Images = {
   heartIcon: require('../Assets/heart.png'),
   rain: require('../Assets/rain.png'),
   cloudy: require('../Assets/cloudy.png'),
-  leftIcon: require('../Assets/leftIcon.png'),
+  leftIcon: require('../Assets/leftIcon.png')
 };

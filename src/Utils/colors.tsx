@@ -16,5 +16,5 @@ export const Colors = {
   gradient2: '#d5b6d8',
   gradient3: '#6c7494',
   detailBackground: '#1e2138',
-  red: '#FF0000',
+  red: '#FF0000'
 };
